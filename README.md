@@ -19,7 +19,7 @@ This is a capless low-dropout (LDO) regulator that provides a regulated **1.2 V*
 |---|---|
 | Reference (BGR) | Bandgap reference, 0.6 V |
 | Error amplifier (X1) | 5-transistor OTA, reference on the inverting input, feedback on the non-inverting input |
-| Pass device (M1) | PMOS, W/L = 30 µ / 0.4 µ |
+| Pass device (M1) | PMOS, W/L = 50*30 µ / 0.4 µ |
 | Compensation (C1) | 2.5 pF Miller capacitor between the OTA output (M1 gate) and Vout |
 | Feedback divider | R1 = R2 = 20 kΩ |
 
