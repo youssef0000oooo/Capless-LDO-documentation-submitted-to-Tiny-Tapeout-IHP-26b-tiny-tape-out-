@@ -34,14 +34,14 @@ The design has no external output capacitor. Stability relies on the internal Mi
 | Parameter | Value | Notes |
 |---|---|---|
 | Output voltage | 1.2 V | Set by BGR and divider |
-| Input voltage range | 1.56 – 2.3 V | Simulated sweep range |
+| Input voltage range | 1.56 – 2.3 V | Simulated sweep range (10 mA load) |
 | Maximum load current | 10 mA | Limited by Tiny Tapeout specs |
-| Dropout voltage | ≈ 0.4 V (0.407 V) | At Vin = 1.56 V, where Vout = 1.154 V (see section 4.1) |
+| Dropout voltage | ≈ 0.4 V (0.407 V) | At 10 mA load, Vin = 1.56 V, where Vout = 1.154 V (see section 4.1) |
 | Line regulation | 143 mV/V | From the Vout vs Vin sweep (section 4.2) |
 | Quiescent current | 65 µA | BGR 15 µA + OTA 20 µA + feedback divider (remainder) |
 | Current efficiency at 10 mA | ≈ 99.3 % | 10 mA / (10 mA + 65 µA) |
 | Load capacitance | 0 – 20 pF | About 5 pF of parasitic capacitance already comes from the signal path in the Tiny Tapeout chip |
-| DC loop gain | ≈ 36.5 dB | Section 4.3 |
+| DC loop gain | ≈ 36.5 dB | Cload = 5 pF (section 4.3) |
 | Unity-gain frequency | ≈ 3.66 MHz | Section 4.3 |
 | Phase margin | ≈ 61° | Section 4.3 |
 
@@ -51,7 +51,7 @@ The design has no external output capacitor. Stability relies on the internal Mi
 
 ![Vout vs Vin](images/vout_vs_vin_dropout.png)
 
-Vin was swept upward while monitoring Vout. At the lower end of the sweep (Vin ≈ 1.56 V) Vout is 1.154 V, giving Vin − Vout ≈ 0.407 V. Below this point Vout falls steeply as the pass device runs out of headroom. Note that Vout is already about 4 % below the 1.2 V nominal at this point.
+Vin was swept upward with a **10 mA** load while monitoring Vout. At the lower end of the sweep (Vin ≈ 1.56 V) Vout is 1.154 V, giving Vin − Vout ≈ 0.407 V. Below this point Vout falls steeply as the pass device runs out of headroom. Note that Vout is already about 4 % below the 1.2 V nominal at this point.
 
 ### 4.2 Line regulation
 
@@ -62,6 +62,8 @@ Across the 1.56 V to 2.3 V input range, Vout rises from about 1.15 V to about 1.
 ### 4.3 Loop gain and stability
 
 ![Loop gain](images/loop_gain.png)
+
+Simulated with Cload = 5 pF only (the on-chip parasitic capacitance, no additional load capacitor).
 
 - DC loop gain: about 36.5 dB
 - Unity-gain frequency: 3.66 MHz (gain ≈ 0 dB at the cursor)
